@@ -1,0 +1,34 @@
+*(x)
+x
+x x
+x x x
+x x x x
+x x x x x x x x x x
+x *(y)
+x y
+x (y y)
+x (y y y)
+x (y y y y)
+x (y y y y y y y y y y)
+*(x) *(y)
+x y
+x (x (y y))
+x (x (x (y y y)))
+x (x (x (x (y y y y))))
+x (x (x (x (x (x (x (x (x (x (y y y y y y y y y y))))))))))
+*(x y)
+x y
+x y (x y)
+x y (x y) (x y)
+x y
+x (x y)
+x (x (x y))
+a (b (c (x y)))
+a (b (c (x (x y))))
+a (b (c (x (x (x y)))))
+a (b (c (x y)))
+a (a (b (c (x y))))
+a (a (a (b (c (x y)))))
+a (b (c (x y)))
+a (b (c (x y) (c (x y))))
+a (b (c (x y) (c (x y)) (c (x y))))

@@ -1,0 +1,4 @@
+# Verify that it does reduction inside body of abstraction,
+# and in operand.
+eta off
+(%x.%y.((%a.%b.(A a B b))) x y) ((%x.x x) F)

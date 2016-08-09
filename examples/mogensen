@@ -1,0 +1,17 @@
+# Torben Mogensen's "Self-interpreter".
+# $Id: mogensen,v 1.1 2011/11/18 23:39:52 bediger Exp $
+eta off
+
+def F \e.\m.m (\x.x) (\m.\n.(e m)(e n)) (\m.\v.e (m v))
+def Y \h.(\x.h(x x))(\x.h(x x))
+
+def E Y F
+
+def doubler %x.x x
+def m godelize doubler
+normalize E m = doubler
+def x %a.%b.%c.a b c
+def z godelize x
+normalize E z = x
+def q godelize (%a.%b.%c.d e f g)
+normalize E q = (%a.%b.%c.d e f g)

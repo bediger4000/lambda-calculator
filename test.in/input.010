@@ -1,0 +1,8 @@
+# Simple beta-reductions
+(%x.x) A
+(%x.x x) A
+(%x.x B) A
+(%x.%y.x y) A B
+(%x.%y.y x) A B
+(%x.%y.y) A B
+(%x.%y.x) A B

@@ -1,0 +1,20 @@
+# $Id: input.043,v 1.1 2011/11/04 23:45:54 bediger Exp $
+# Try out alpha-equivalence testing
+a = a
+b = b
+a = b
+b = a
+(\x.x) = (\abcdegh.abcdegh)
+def A (\x. y x z) 
+def B (\abcdegh.y abcdegh z)
+def C (\abcdegh.q abcdegh z)
+A = B
+B = A
+A == B
+B == A
+A = C
+B = C
+C = C
+(\x y z. z z y (x (\x. x y z) z)) = (\a b c. c c b (a (\x. x b c) c)) 
+(\x y z. z z y (x (\x. x y z) z)) = (\a b c. c c b (a (\q. q b c) c)) 
+(\x y z. z z y (x (\x. x (\y.y z) z) z)) = (\a b c. c c b (a (\q. q (\fn.fn c) c) c)) 

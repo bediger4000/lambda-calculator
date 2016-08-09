@@ -1,0 +1,62 @@
+# Bluff Combinator - spoofs "is zero" and "numerically equal"
+# predicates for Church Numerals.  Nordic Journal of Computing,
+# Vol N, No M
+eta off
+def pair %A.%B.%a.(a A B)
+def true  %b.%c.b
+def false %d.%e.e
+def p21  %f.((f)true)
+def p22  %p.((p)false)
+def not   %g.(g false true)
+def or    %h.%i.(h true i)
+def and   %j.%k.(j k false)
+def I     %l.l
+def succ  %o.%p.%q.p(o p q)
+def c0    false
+def c1    normalize succ c0
+def c2    normalize succ c1
+def c3    normalize succ c2
+def c4    normalize succ c3
+def c5    normalize succ c4
+def pred  %r.(p22 (r (%s.(pair (succ (p21 s)) (p21 s))) (pair c0 c0)))
+def monus %t.%u.(u pred t)
+def zerop %v.(v (%w.false) true)
+def equal %x.%y.(and (zerop (monus x y)) (zerop (monus y x)))
+def bluff1 %r1.%r2.(zerop (r2 c0 c1) true (equal c1 (r2 (\x.c3) c2) (%x.c0) c0))
+def bluff2 %r1.%r2.(r2 (%x.true) true I)
+
+# All the "normalize" commands should evaluate to %b.%c.b, "true"
+
+bluff1
+# These should all evaluate to  %b.%c.b, "true"
+zerop bluff1
+equal bluff1 bluff1
+equal bluff1 c0
+equal c0  bluff1
+equal c1  bluff1 
+equal bluff1 c1
+equal c2  bluff1 
+equal bluff1 c2
+equal c3  bluff1 
+equal bluff1 c3
+equal c4  bluff1 
+equal bluff1 c4
+equal c5  bluff1 
+equal bluff1 c5
+
+bluff2
+# These should all evaluate to  %b.%c.b, "true"
+zerop bluff2
+equal bluff2 bluff2
+equal bluff2 c0
+equal c0  bluff2 
+equal c1  bluff2 
+equal bluff2 c1
+equal c2  bluff2 
+equal bluff2 c2
+equal c3  bluff2 
+equal bluff2 c3
+equal c4  bluff2 
+equal bluff2 c4
+equal c5  bluff2 
+equal bluff2 c5

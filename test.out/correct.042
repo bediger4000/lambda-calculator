@@ -1,0 +1,5 @@
+%c.%d.%e.%f.%g.%h.%i.%j.%k.%l.%m.%n.%o.%p.%q.%r.%s.%t.%u.%v.%w.%x.%y.%z.%A.b c d e f g h i j k l m n o p q r s t u v w x y z A
+%c.%d.%e.%f.%g.%h.%i.%j.%k.%l.%m.%n.%o.%p.%q.%r.%s.%t.%u.%v.%w.%x.%y.%z.%B.A b C c d e f g h i j k l m n o p q r s t u v w x y z B
+%c.%d.%e.%f.%g.%h.%i.%j.%k.%l.%m.%n.%o.%p.%q.%r.%s.%t.%u.%v.%w.%x.%y.%z.%A.%B.%C.%D.b c d e f g h i j k l m n o p q r s t u v w x y z A B C D
+%e.%f.%g.%h.%i.%j.%k.%l.%m.%n.%o.%p.%q.%r.%s.%t.%u.%v.%w.%x.%y.%z.%A.%B.%C.%D.%E.%F.a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F
+%A.%B.%C.%D.%E.%F.%G.%H.%I.%J.%K.%L.%M.%N.%O.%P.%Q.%R.%S.%T.%U.%V.%W.%X.%Y.a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F G H I J K L M N O P Q R S T U V W X Y

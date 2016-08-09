@@ -1,0 +1,27 @@
+#!/bin/bash
+
+if [ ! -x ./lc ]
+then
+	echo "Compile lc first" >&2
+	exit 0
+fi
+
+# Test inputs in test.in/input.NNN
+# Correct outputs in test.out/correct.NNN
+
+N=$1
+echo Running case $N
+FNAME=test.in/input.$N
+./lc -p < $FNAME > test.out/output.$N
+echo Verifying case $N
+if [ ! -r test.out/correct.$N ]
+then
+	echo "No correct output for test case $N"
+else
+	if diff test.out/correct.$N test.out/output.$N
+	then
+		:
+	else
+		echo "Test case $N went wrong"
+	fi
+fi

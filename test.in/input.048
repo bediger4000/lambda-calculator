@@ -1,0 +1,17 @@
+# Get some alpha-equivalence and lexical-equivalence
+# corner-cases for better branch coverage.
+# $Id: input.048,v 1.1 2011/11/09 13:34:21 bediger Exp $
+eta off
+(\a.b c a) = (\x.b c x)
+\b.(\a.b c a) = \f.(\x.f c x)
+\c.\b.(\a.b (\a.c) a) = \Q.\f.(\x.f (\x.Q) x)
+\c.\b.(\a.b (\a.c) a) = \Q.\f.(\x.f (\x.f) x)
+(\a.b Q a) = (\x.b c x)
+(\a.b c a) = (\x.b x x)
+(\a.b c a) = (\x.b x c)
+(\a.a c x) = (\x.x c x)
+(\a.a x) = (\x.x a)
+(\a.a a) = (\x.x a)
+(\a.a x) = (\x.x x)
+(\a.a (\a b c.a b c)) = (\x.x fqx)
+(\a.a (\a b c.a b c)) == (\a.a fqx)

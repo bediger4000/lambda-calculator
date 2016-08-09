@@ -1,0 +1,17 @@
+# Check parsing of abstractions, various parenthesizings
+print %x.x
+print (%x.x)
+print %x.(x)
+print %x.(a x)
+print %x.((a x))
+print %x.%y.x
+print %x.(%y.(x))
+print %x.%y.(x)
+print %x.%y.y
+print (%a.%b.a)(%x.%y.y)
+print %a.a b c
+print (%a.a a a)b
+print (%a.((a a) a)) b
+print %f.(%x.f(x x))(%x.f(x x))
+print %f.(%x.(f (x x))) (%x.(f (x x)))
+print (%x.x x) A

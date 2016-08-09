@@ -1,0 +1,12 @@
+# Repeated use of struct small_hashtable
+# Try to trigger bugs in small_hashtable free
+# and allocation.
+def W %f.(%x.f(x x))(%x.f(x x))
+free W
+bound W
+def X (%f.q(%x.p f(x r x))(%x.s f(x t x)) u v)
+free X
+bound X
+def A %a.%b.%c.%d.%e.(a b c d e)
+free A
+bound A

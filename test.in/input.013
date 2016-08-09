@@ -1,0 +1,5 @@
+eta off
+(%a.a a)((%a.a a)(%a.A a)) a
+(%a.a a)((%a.a a)(%a.a A)) a
+(%b.b b)((%c.c c)(%a.a A)) M
+# normalize (%b.b b)(%c.c c)(%a.a A) M  - does not terminate.

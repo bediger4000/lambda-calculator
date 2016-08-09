@@ -1,0 +1,8 @@
+# $Id: input.036,v 1.1 2011/10/28 13:58:29 bediger Exp $
+# try out eta reduction
+eta on
+eta
+eta off
+eta
+eta on
+\x. M x

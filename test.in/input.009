@@ -1,0 +1,14 @@
+# Scott Numerals
+define zero %a.%b.a
+define succ %c.%d.%e.(e c)
+define case %f.%g.%h.f g h
+define pred %i.(i (%j.%k.j) (%l.l))
+define one normalize succ zero
+define two normalize succ one
+define zerotest normalize %a.(case a true (%d.false))
+zerotest zero
+zerotest one
+zerotest two
+zerotest (pred (succ zero))
+zerotest (pred one)
+zerotest (pred (pred two))

@@ -1,0 +1,53 @@
+# Scott Numerals, and various fixed point combinators
+define zero %a.%b.a
+define succ %c.%d.%e.(e c)
+define case %f.%g.%h.f g h
+define pred %i.(i (%j.%k.j) (%l.l))
+define one normalize succ zero
+define two normalize succ one
+
+define zerotest normalize %a.(case a true (%d.false))
+zerotest zero
+zerotest one
+zerotest two
+zerotest (pred (pred two))
+
+# Curry
+define Y %f.((%x.f(x x))(%x.f(x x)))
+# Turing
+define Theta (%x.%y.y(x x y))(%x.%y.y(x x y))
+# John Tromp
+define Tromp (%x.%y.x y x)(%y.%x.y (x y x))
+# Jan Willem Klop
+def L %a.%b.%c.%d.%e.%f.%g.%h.%i.%j.%k.%l.%m.%n.%o.%p.%q.%s.%t.%u.%v.%w.%x.%y.%z.%r.(r (t h i s i s a f i x e d p o i n t c o m b i n a t o r))
+def YK (L L L L L L L L L L L L L L L L L L L L L L L L L L)
+
+define R (%o.%n.%m.( case m n (o (succ n)) ))
+
+define add (Y R)
+add zero zero
+add one zero
+add zero one 
+add one one 
+add two two 
+
+define add2 (Theta R)
+add2 zero zero
+add2 one zero
+add2 zero one 
+add2 one one 
+add2 two two 
+
+define add3 (Tromp R)
+add3 zero zero
+add3 one zero
+add3 zero one 
+add3 one one 
+add3 two two 
+
+def add4 (YK R)
+add4 zero zero
+add4 one zero
+add4 zero one
+add4 one one
+add4 two two

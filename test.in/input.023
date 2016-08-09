@@ -1,0 +1,19 @@
+# Define and redefine an abbreviation:
+# see if previous parsed expressions get
+# freed correctly.
+def A (a b c d e f g h)
+A
+def A (W X Y)(%Z.Z Z pq r)
+A
+def A (a b c d e f g h)
+A
+def A (%W.W X Y)(%Z.Z Z pq r)
+A
+def A %b.%a.(a b c d e f g h)
+A
+def A %pq.%r.((W X Y)(%Z.(Z Z pq r)))
+A
+def A (a (b c) (d (e (f (g h)))))
+A
+def A %X.%Y.%W.((W X Y)(%Z.Z Z W Y))
+A

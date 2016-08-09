@@ -1,0 +1,30 @@
+%r1.%r2.r2 (%d.%e.e) (%p.%q.p q) (%w.%d.%e.e) (%b.%c.b) (%b.%c.b) (r2 (%x.%p.%q.p (p (p q))) (%p.%q.p (p q)) (%r.r (%s.%a.a (%p.%q.p (s (%b.%c.b) p q)) (s (%b.%c.b))) (%a.a (%d.%e.e) (%d.%e.e)) (%d.%e.e)) (%p.%q.p q) (%w.%d.%e.e) (%b.%c.b) (r2 (%x.%p.%q.p (p (p q))) (%p.%q.p (p q)) (%s.%a.a (%p.%q.p (s (%b.%c.b) p q)) (s (%b.%c.b))) (%a.a (%d.%e.e) (%d.%e.e)) (%d.%e.e) (%w.%d.%e.e) (%b.%c.b)) (%d.%e.e) (%x.%d.%e.e) (%d.%e.e))
+%b.%c.b
+%e.e
+%b.%c.b
+%b.%c.b
+%b.%c.b
+%b.%c.b
+%b.%c.b
+%b.%c.b
+%b.%c.b
+%b.%c.b
+%b.%c.b
+%b.%c.b
+%b.%c.b
+%b.%c.b
+%r1.%r2.r2 (%x.%b.%c.b) (%b.%c.b) (%l.l)
+%b.%c.b
+%b.%c.b
+%b.%c.b
+%b.%c.b
+%b.%c.b
+%b.%c.b
+%b.%c.b
+%b.%c.b
+%b.%c.b
+%b.%c.b
+%b.%c.b
+%b.%c.b
+%b.%c.b
+%b.%c.b

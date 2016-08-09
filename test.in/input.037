@@ -1,0 +1,15 @@
+# $Id: input.037,v 1.1 2011/10/28 20:58:48 bediger Exp $
+# More eta reduction testing
+eta on
+(\abc.\x.abc x) M
+\x.(\y.f y) z x
+\f.\n.f n
+(\x.\u.x u) (\a.\b.\c.a b c)
+def a normalize ((\x.(\y.(\z. M z) y) x) abc)
+eta off
+def b normalize ((\x.(\y.(\z. M z) y) x) abc)
+a
+b
+m (n (o (p (q (r (s (\t.M t)))))))
+eta on
+m (n (o (p (q (r (s (\t.M t)))))))

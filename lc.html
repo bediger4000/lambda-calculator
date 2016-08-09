@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "file:///home/bediger/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Lambda Calculator</title>
+<!-- $Id: lc.html,v 1.11 2011/11/17 13:47:11 bediger Exp $ -->
+<meta name="description" content="Article about Lambda Calculus Interpreter" />
+<meta name="keywords" content="lambda calculus, intepreter" />
+</head>
+<body>
+<h1>Lambda Calculator</h1>
+<h2>Version 1.0</h2>
+<p><em>last revision: 2011-11-12</em></p>
+<p><a href="mailto:bediger@stratigery.com">Bruce Ediger</a><br/></p>
+<p><a href="/index.html">Bruce Ediger's web pages</a></p>
+<hr/>
+<script language="JavaScript" type="text/javascript" src="partyon.js">
+</script>
+<hr />
+<h1>Table of contents</h1>
+<ol>
+	<li><a href="#INTRO">Introduction</a></li>
+	<li><a href="#STARTING">Starting</a></li>
+	<li><a href="#RUNNING">Using</a></li>
+	<li><a href="#DOWNLOADS">Downloads</a></li>
+	<li><a href="#INSTALL">Building and Installing</a></li>
+</ol>
+<h1><a name="INTRO">Introduction</a></h1>
+<p>
+This document describes how to download or build, then use <kbd>lc</kbd> v1.0,
+yet another lambda calculator.
+</p>
+<p>
+<kbd>lc</kbd>  interprets a
+programming language with similarities to various untyped lambda calculus
+formal systems. It doesn't exactly interpret any "untyped lambda calculus" 
+in that it runs on computers with finite CPU speed and a finite memory.
+Most or all formal systems fail to take limits into account.
+</p>
+<p>
+<kbd>lc</kbd>  performs normal-order (leftmost-outermoust) Beta and Eta reductions.
+The user can turn off Eta reductions, but Beta reductions always remain in effect.
+</p>
+<p>
+<kbd>lc</kbd> allows the user to create
+<a href="#ABBREVIATION">abbreviations</a>, and simple
+<a href="#PARAMETERIZED">parameterized abbreviations</a>.
+Abbreviations allow the user to reference possibly very complex terms
+with a single identifier. Parameterized abbreviations can be used
+to facilitate use of terms with repetitive structure, like Church Numerals.
+</p>
+<h1><a name="STARTING">Starting</a></h1>
+<p>
+<kbd>lc</kbd>  is a command line program.  You invoke it by typing in
+its name ("lc") and possibly some flags and options.
+</p>
+<h2>Command Line Options</h2>
+<table border="0">
+	<tr><td><kbd>-L <em>filename</em></kbd></td><td></td><td>Read and intrepret <em>filename</em> before accepting interactive input.</td></tr>
+	<tr><td><kbd>-p</kbd></td><td></td><td>Do not print a prompt before accepting input.</td></tr>
+</table>
+<p>
+<kbd>lc</kbd>  uses "<kbd>LC&gt;</kbd>" as its command prompt.
+when the user hits return, <kbd>lc</kbd> does Beta reduction,
+and possibly Eta reduction, until it reaches a normal form.
+It prints the normal form, then waits for more input.
+</p>
+<p>
+<kbd>lc</kbd>  reads from stdin and writes output to stdout, so you might
+use it as part of a pipeline, or with input or output redirection.
+</p>
+<p>
+The <kbd>-L</kbd> option with associated filenames can appear more than
+once on the command line. <kbd>lc</kbd> will read and evaluate the files
+in the order they appear on the command line.
+</p>
+<h1><a name="RUNNING">Using the interpreter</a></h1>
+<p>
+At the <kbd>LC&gt;</kbd> prompt, the user can type a
+<a href="#TERMS">lambda calculus term</a>,
+or an <a href="#COMMANDS">interpreter command</a>.
+</p>
+<p>
+To quit, the user must cause an end-of-file condition (usually control-D
+from the keyboard) or send an interrupt signal (usually control-C from
+the keyboard).
+</p>
+<p>
+The user can interrupt a long-running reduction with a keyboard interrupt
+(usually control-C), which will return to the <kbd>LC&gt;</kbd> prompt.
+Such an interrupt probably causes a memory leak.  At exit <kbd>lc</kbd>
+notifies the user if it detected any memory leaks.
+</p>
+<h2>Examples</h2>
+<ul>
+	<li><a href="lc/bluff.combinator">Bluff Combinator</a></li>
+	<li><a href="lc/scott.numerals">Scott Numerals</a></li>
+	<li><a href="lc/lambdaI.church.numerals">Church Numerals in &lambda;I</a></li>
+	<li><a href="lc/church.numerals">Church Numerals</a></li>
+</ul>
+<h2><a name="TERMS">Lambda Calculus Terms</a></h2>
+<p>
+A <em>term</em> (to <kbd>lc</kbd>) consists of a variable, an abstraction,
+or an application of one sub-term to another.
+</p>
+<h3>Identifiers</h3>
+<p>
+Any C- or Java-format identifier can serve as an <kbd>lc</kbd> <em>identifier</em>.
+That means that identifiers take
+the form of a string beginning with an upper or lowercase letter,
+followed by zero or more letters, digits or underscores.
+</p>
+<h3>Variables</h3>
+<p>
+Variables, free or bound, have identifiers as names.
+<kbd>lc</kbd> will rename bound variables to prevent "variable capture".
+For instance, evaluating <kbd>(%x.%y.y x) y</kbd> results in <kbd>%a.a y</kbd>,
+not <kbd>%y.y y</kbd>. The bound variable "y" in the original term
+gets renamed to "a" in the final normal form.
+</p>
+<h3>Abstractions</h3>
+<p>
+An <em>abstraction</em> follows the traditional lambda calculus pattern:
+<kbd>&lambda;x.<em>body</em></kbd>. The "<kbd>&lambda;x</kbd>" part
+denotes the beginning of the abstraction, and the name of the dummy
+variable that might appear in the body of the abstraction.
+The body must constitute a term. Any legal-format variable can occur
+as the bound variable in an abstraction.
+</p>
+<p>
+Any of the ASCII characters <kbd>$</kbd>, <kbd>%</kbd>, <kbd>\</kbd> or
+<kbd>^</kbd> (dollar sign, percent, backslash, caret)
+can be used as the "&lambda;" character in an abstraction.
+You can't use a UTF-8 &lambda;, as this program only understands ASCII.
+</p>
+<p>
+Either the ASCII character <kbd>.</kbd> (period or full stop), or the string
+<kbd>-&gt;</kbd> can denote where
+the binding site stops, and where the body begins.
+</p>
+<p>
+<kbd>lc</kbd> supports multi-variable abstraction notation.
+In lambda calculus literature,
+multi-variable abstractions often get written like this: <em>&lambda;xyz.x z y</em>
+<kbd>lc</kbd> interprets the <em>xyz</em> part as a single bound variable named <kbd>xyz</kbd>,
+so the user separates multiple variables with whitespace: <kbd>\x y z.x z y</kbd>.
+The user can also write nested abstractions: <kbd>\x.\y\.z.x z y</kbd>.
+</p>
+<h5>Example Abstractions</h5>
+<pre>
+^x.x (x x)
+%p q r.p r (q r)
+\x.\y-&gt;x (x (x (x y)))
+$x y z.x (y z)
+</pre>
+<h3>Applications</h3>
+<p>
+<em>Application</em> occurs by creating input with two terms side by side:
+<kbd>X Y</kbd>.  Terms associate to the left, so <kbd>X Y Z</kbd>
+gets evaluated as <kbd>((X Y) Z)</kbd>. You have to explicitly parenthesize
+terms to get association-to-the-right: <kbd>X (Y Z)</kbd>.
+</p>
+<p>
+The body of an abstraction extends as far as possible. To apply an
+abstraction to a second term, the user must parenthesize:
+</p>
+<pre>
+(\x y z. x (y z)) A B C
+</pre>
+<p>
+Without parenthesizing the abstraction, <kbd>\x y z. x (y z) A B C</kbd>
+constitutes a single abstraction with a six-term sized body.
+</p>
+<h2><a name="COMMANDS">Interpreter Commands</a></h2>
+<h3>Reduction Control and Display</h3>
+<ul>
+	<li><kbd>timer on|off</kbd> - when on, prints elapsed time taken by reductions.</li>
+	<li><kbd>step on|off</kbd> - single step reductions. Requires user to hit return after each reduction.</li>
+	<li><kbd>trace on|off</kbd> - prints out what happens for each reduction.</li>
+	<li><kbd>eta on|off</kbd> - turn on or off Eta (&eta;) reductions.</li>
+	<li><kbd>load <em>filename</em></kbd> - read and evaluation contents of <em>filename</em>.</li>
+</ul>
+<p>
+You must double-quote file names containing any characters that
+an <kbd>lc</kbd>
+identifier can't contain.  That means full or partially qualifed path names
+(they contain slash characters) or any file names with whitespace in them.
+</p>
+<p>
+You can check the state of any of these commands by typing them in without
+"on" or "off" at the <kbd>LC&gt;</kbd> prompt.
+</p>
+<h3><a name="ABBREVIATION">Abbreviations</a></h3>
+<ul>
+	<li><kbd>define <em>identifier</em> <em>term</em></kbd></li>
+	<li><kbd>def <em>identifier</em> <em>term</em></kbd></li>
+	<li><kbd>$$</kbd> - result of last expression evaluation.</li>
+</ul>
+<p>
+<kbd>define</kbd> or <kbd>def</kbd> stores a copy of the <em>term</em> without
+performing any reductions. Each time an <em>identifier</em> used in a previous
+abbreviation appears, <kbd>lc</kbd> inserts a copy of the term so
+abbreviated.
+</p>
+<p>
+The special token <kbd>$$</kbd> represents the results of the last
+successful reduction.
+<kbd>$$</kbd> changes whenever <kbd>lc</kbd> calculates
+a normal form. <kbd>$$</kbd> takes on the value of that new normal form.
+The user can insert the last normal form calculated by inserting <kbd>$$</kbd>
+one or more times in the next expression typed in.
+</p>
+<p>
+The identifier of an abbreviation gets its term substituted 
+in its place, as if surrounded by parentheses.  For example:
+</p>
+<pre>
+LC&gt; def abbrev1 (\x.\y.\z.x (y z))
+LC&gt; A abbrev1 C
+A ((\x.\y.\z.x (y z)) C
+</pre>
+<p>
+Abstractions can "capture" identifiers in the abbreviation that lexically
+match the bound variable:
+</p>
+<pre>
+LC&gt; def X3 x x x
+LC&gt; (\x.X3) A
+A A A
+LC&gt;
+</pre>
+<h3><a name="PARAMETERIZED">Parameterized Abbreviations</a></h3>
+<ul>
+	<li><kbd>define <em>identifier</em> *<em>term</em></kbd></li>
+	<li><kbd>define <em>identifier</em> <em>term</em><sub>1</sub> *<em>term</em><sub>2</sub></kbd></li>
+	<li><kbd>define <em>identifier</em> *<em>term</em><sub>1</sub> *<em>term</em><sub>2</sub></kbd></li>
+	<li><kbd>define <em>identifier</em> *<em>term</em><sub>1</sub> <em>term</em><sub>2</sub></kbd></li>
+</ul>
+<p>
+Marked parts of term abbreviated by <kbd>identifier</kbd>
+get expanded. When the interpreter sees a use of an abbreviation like
+<kbd><em>identifier</em>{N}</kbd>, it expands the marked terms N times.
+The number <em>N</em></kbd> has to be greater than zero.
+This feature can be used to make Church numerals more convenient.
+</p>
+<pre>
+LC&gt; def C0 \f n.n
+LC&gt; def C  \f n.*f n
+LC&gt; print C{2}
+%f.%n.f (f n)
+LC&gt;
+</pre>
+<p>
+Note that the Church Numeral for zero is special: you can't define it
+using parameterized abbreviations.  This seems consistent with the inductive
+definition of numbers in systems like Peano Arithmetic.
+</p>
+<p>
+You can create simple or complex parameterized abbreviations:
+</p>
+<pre>
+LC&gt; def X \x.*x
+LC&gt; X{4}
+%x.x x x x
+LC&gt; def XY \x y.*x (x *y)
+LC&gt; XY{3}
+%x.%y.x (x (x (x (y y y))))
+</pre>
+<h3>Examining Terms</h3>
+<ul>
+	<li><kbd>print <em>term</em></kbd> - print a term or abbreviation without any reductions.</li>
+	<li><kbd>free <em>term</em></kbd> - print the free variables appearing in a term.</li>
+	<li><kbd>bound <em>term</em></kbd> - print the bound variables appearing in a term.</li>
+</ul>
+<p>
+None of these commands produce terms, just output on stdout.
+</p>
+<h3>Operations on Terms</h3>
+<ul>
+	<li><kbd>godelize <em>term</em></kbd></li>
+	<li><kbd><a name="NORMALIZE">normalize</a> <em>term</em></kbd></li>
+</ul>
+<p>
+<kbd>godelize</kbd> makes a godelization of a term by Torben Mogensen's
+"higher order syntax" method. The godelization is in Beta normal form,
+even if the original term is not.
+</p>
+<p>
+<kbd>normalize</kbd> causes an out-of-normal-order reductions on
+the term it applies to. Judicious use
+of <kbd>normalize</kbd> can cause non-normal order evaluation,
+or it can be used to store an abbreviation of a normal form.
+</p>
+<p>
+Both of these operations produce terms, and so can appear in the definition of an
+abbreviation, or in the midst of a more complicated term. 
+</p>
+<h3>Comparing Terms</h3>
+<ul>
+	<li><kbd><em>term<sub>1</sub></em> == <em>term<sub>2</sub></em></kbd> - lexical equality</li>
+	<li><kbd><em>term<sub>1</sub></em> = <em>term<sub>2</sub></em></kbd> - alpha equality</li>
+</ul>
+<p>
+Lexical equivalence ("==") requires exact string-matching between all
+variables, bound or free. Alpha equivalence ("=") requires string-matches
+for all free variables, and identical appearances of bound variables and
+their binding sites.
+</p>
+<p>
+<kbd>lc</kbd> does not perform any reductions on either side of "=" or "==".
+The user can use <a href="#NORMALIZE"><kbd>normalize</kbd></a> on either or both sides of a
+comparison to compare beta normal forms.
+</p>
+<p>
+Neither comparison produces a term, just output on stdout indicating
+equivalence or non-equivalence.
+</p>
+<h1><a name="DOWNLOADS">Downloads</a></h1>
+<ul>
+	<li><a href="lc/lc-1.0-1.i386.rpm">RPM package</a> for x86 linux</li>
+	<li><a href="lc/lc-1.0-1-i686.pkg.tar.xz">Arch package</a> for i686 linux</li>
+	<li><a href="lc/lc-1.0-i386-1.tgz">Slackware package</a> for x86 linux</li>
+	<li><a href="lc/lc">Plain old x86 Linux executable</a></li>
+	<li><a href="lc/lc-1.0.tar.gz">Source code</a></li>
+</ul>
+<h1><a name="INSTALL">Building and Installing</a></h1>
+<p>
+<kbd>lc</kbd>  compiles and runs under Linux, and probably
+Solaris and most BSD operating systems.  I wrote it in the
+strictest ANSI-C I could,
+with the exception of some signals it handles.
+</p>
+<p>
+I did not use GNU "autoconf" tools for this project, as I wanted to
+use alternative C compilers, and lexer and compiler-compiler
+(lex, flex, yacc, bison, byacc) alternatives.
+</p>
+<p>
+Use one of these commands:
+</p>
+<table border="0">
+	<tr><td><kbd>make gnu</kbd></td><td>&nbsp;</td><td>GNU-named tools.  Works for most or all linux distros.</td></tr>
+	<tr><td><kbd>make cc</kbd></td><td>&nbsp;</td><td>Traditional unix names for tools.  Use for Solaris and *BSD</td></tr>
+	<tr><td><kbd>make pcc</kbd></td><td>&nbsp;</td><td>Compile with the re-invigorated <a href="http://pcc.ludd.ltu.se/">PCC</a> C compiler</td></tr>
+	<tr><td><kbd>make lcc</kbd></td><td>&nbsp;</td><td>Compile using the <a href="http://www.cs.princeton.edu/software/lcc/">lcc</a> C compiler.</td></tr>
+	<tr><td><kbd>make tcc</kbd></td><td>&nbsp;</td><td>Compile using the <a href="http://bellard.org/tcc/">tcc</a> C compiler.</td></tr>
+	<tr><td><kbd>make clang</kbd></td><td>&nbsp;</td><td>Compile with the LLVM C-language front end, <a href="http://clang.llvm.org/">Clang</a></td></tr>
+</table>
+<p>
+This should result in an executable file named "lc".
+You can use <kbd>mv</kbd> or <kbd>cp</kbd> to put the file named "lc" in your PATH,
+or you can execute it in place.  <kbd>lc</kbd> does not automatically
+read startup or "rc" files, nor does it assume it runs while residing in a
+specific directory.
+</p>
+</body>
+</html>

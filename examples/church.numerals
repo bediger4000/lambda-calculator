@@ -1,0 +1,35 @@
+# Classic Church Numerals
+# $Id: church.numerals,v 1.1 2011/11/18 23:39:52 bediger Exp $
+eta off
+define c0 %f.%n.n
+define c{*} %f n.*f n
+define succ %x.%y.%z.y (x y z)
+define plus %d.%e.%f.%g.d f (e f g)
+define pred %n.%f.%x.n(%g.%h.h (g f))(%u.x)(%u.u)
+def sub (\u v.(v pred u))
+define T %a.%b.a
+define F %a.%b.b
+define ifthenelse %p.%x.%y.p x y
+define zerop %n.n(%x.F) T
+
+print pred_and_succ_test
+normalize pred c{2} = c{1}
+normalize succ c{2} = c{3}
+
+define Y %f.((%x.f(x x))(%x.f(x x)))
+define R normalize %n.%o.%p.(ifthenelse (zerop o) p (n (pred o) (succ p)))
+
+# Doing addition this way allows checking against the
+# each Church-numeral "plus" term, above
+define add (Y R)
+
+print add_plus_comparison
+normalize add c0 c0 = normalize plus c0 c0
+normalize add c{1} c0 = normalize plus c{1} c0
+normalize add c0 c{1} = normalize plus c0 c{1}
+normalize add c{1} c{1} = normalize plus c{1} c{1}
+normalize add c{1} c{2} = normalize add c{2} c{1}
+normalize succ (succ (succ c0)) = normalize c{3}
+normalize add c{2} c{2} = normalize plus c{2} c{2}
+normalize c{3} c{2} = c{8}
+normalize sub c{7} c{3} = c{4}

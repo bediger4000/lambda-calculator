@@ -1,0 +1,36 @@
+# Barendregt-style numerals
+define T %a.%b.a
+define F %c.%d.d
+define IF %e.%f.%g.(e f g)
+define FIRST %h.(h T)
+define SECOND %i.(i F)
+define PAIR %M.%N.%z.(z M N)
+
+IF T true false
+IF F true false
+
+define pair normalize PAIR first second
+(FIRST pair)
+(SECOND pair)
+
+define I %j.j
+define zero I
+
+define SUCC %k.(PAIR F k)
+define PRED %l.(l F)
+
+def one normalize SUCC zero
+def two normalize SUCC one
+
+define ZEROP %m.m T
+
+define R %n.%o.%p.(IF (ZEROP o) p (n (PRED o) (SUCC p)))
+
+define Y %q.(%r.q(r r))(%s.q(s s))
+define add (Y R)
+
+add zero zero
+add one zero
+add zero one
+add one one
+add two two

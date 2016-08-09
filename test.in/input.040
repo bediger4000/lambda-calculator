@@ -1,0 +1,13 @@
+# Try out the $$ "previous result" token
+# $Id: input.040,v 1.2 2011/11/03 12:58:00 bediger Exp $
+print $$
+(\x.x x) aa
+print $$
+(\x.x x x) $$
+print $$
+(\y x.x y x) (\a.a)
+print $$
+$$ == $$
+normalize $$ == $$
+$$ == normalize $$
+$$ (\b.b)

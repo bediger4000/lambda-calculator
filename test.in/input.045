@@ -1,0 +1,45 @@
+# Try out parameterized expressions
+# $Id: input.045,v 1.2 2011/11/08 22:03:51 bediger Exp $
+def X *x
+print X
+X{1}
+X{2}
+X{3}
+X{4}
+X{10}
+def Y x *y
+print Y
+Y{1}
+Y{2}
+Y{3}
+Y{4}
+Y{10}
+def Z *x *y
+print Z
+Z{1}
+Z{2}
+Z{3}
+Z{4}
+Z{10}
+def A *(x y)
+print A
+A{1}
+A{2}
+A{3}
+def B *x y
+B{1}
+B{2}
+B{3}
+def C a (b (c (*x y)))
+C{1}
+C{2}
+C{3}
+def D *a (b (c (x y)))
+D{1}
+D{2}
+D{3}
+def E a (b *(c (x y)))
+E{1}
+E{2}
+E{3}
+def XYZ{*} *a *b *c

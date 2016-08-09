@@ -1,0 +1,3 @@
+def ORK \f.*(\x.f (x x))
+print ORK
+print ORK{2}

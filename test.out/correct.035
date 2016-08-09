@@ -1,0 +1,81 @@
+"zonk"
+"cronk"
+Substitute (%y.y) for x in (x x x)
+Substitution: (%y.y) (%y.y) (%y.y)
+Substitute (%y.y) for y in (y)
+Substitution: %y.y
+Substitute (%y.y) for y in (y)
+Substitution: %y.y
+%y.y
+X
+X X
+X X X
+X (X X)
+X (X X X)
+X (X (X X))
+X (X X) X
+X X (X X)
+X X X X
+X (X X (X X))
+X (X (X X) X)
+X (X X X X)
+X (X (X X X))
+X (X (X (X X)))
+X (X X) (X X)
+X (X (X X)) X
+X (X X X) X
+X X (X X X)
+X X (X (X X))
+X (X X) X X
+X X (X X) X
+X X X (X X)
+X X X X X
+X (X X (X (X X)))
+X (X X (X X X))
+X (X (X X X) X)
+X (X (X (X X)) X)
+X (X (X X) (X X))
+X (X X X X X)
+X (X (X X) X X)
+X (X X (X X) X)
+X (X X X (X X))
+X (X (X X (X X)))
+X (X (X (X X) X))
+X (X (X X X X))
+X (X (X (X X X)))
+X (X (X (X (X X))))
+X (X X) (X (X X))
+X (X X) (X X X)
+X (X (X X X)) X
+X (X (X (X X))) X
+X (X (X X)) (X X)
+X (X X X X) X
+X (X (X X) X) X
+X (X X (X X)) X
+X (X X X) (X X)
+X X (X X (X X))
+X X (X (X X) X)
+X X (X X X X)
+X X (X (X X X))
+X X (X (X (X X)))
+X (X X) X (X X)
+X (X X) (X X) X
+X (X (X X)) X X
+X (X X X) X X
+X X (X X) (X X)
+X X (X (X X)) X
+X X (X X X) X
+X X X (X X X)
+X X X (X (X X))
+X (X X) X X X
+X X (X X) X X
+X X X (X X) X
+X X X X (X X)
+X X X X X X
+Substitute (%y.y) for x in (x x)
+Substitution: (%y.y) (%y.y)
+Substitute (%y.y) for y in (y)
+Substitution: %y.y
+Substitute (%y.y) for y in (y)
+Substitution: %y.y
+%y.y

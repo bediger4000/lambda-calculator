@@ -1,0 +1,8 @@
+a b c d e f g h
+W X Y (%Z.Z Z pq r)
+a b c d e f g h
+X X pq r Y
+%b.%a.a b c d e f g h
+%pq.%r.W X Y (%Z.Z Z pq r)
+a (b c) (d (e (f (g h))))
+%X.%Y.%W.W X Y (%Z.Z Z W Y)

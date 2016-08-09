@@ -1,0 +1,6 @@
+# Try out definition of definition.
+def I (%x.x)
+def A I
+A
+# The thing printed out here might be "A", might be "%x.x"
+# depending on the way "def" works, or ought to work.

@@ -1,0 +1,21 @@
+%b.%c.b c
+%f.%x.f x
+%b.%c.b (b c)
+%f.%x.f (f x)
+%f.%x.f x
+true
+true
+false
+false
+%a.%b.b
+%f.%g.g
+%b.%c.b c
+%b.%c.b c
+%f.%g.f g
+%b.%c.b (b c)
+%f.%g.f (f g)
+%b.%c.b (b (b c))
+%b.%c.b (b (b c))
+%b.%c.b (b (b c))
+%b.%c.b (b (b (b c)))
+%f.%g.f (f (f (f g)))

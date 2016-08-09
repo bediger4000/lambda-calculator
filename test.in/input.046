@@ -1,0 +1,51 @@
+# Classic Church Numerals
+eta on
+define C0 %a.%b.b
+define C{*}  \a b.*a b
+
+define succ %a.%b.%c.b (a b c)
+define plus %d.%e.%f.%g.d f (e f g)
+define pred %n.%f.%x.n(%g.%h.h (g f))(%u.x)(%u.u)
+define T %a.%b.a
+define F %a.%b.b
+define ifthenelse %p.%x.%y.p x y
+define zerop %n.n(%x.F) T
+
+pred_plus_test
+normalize pred C{3} = normalize C{2}
+normalize pred C{2} = normalize C{1}
+normalize pred C{1} = normalize C0
+normalize plus C{5} C{6} = normalize C{11}
+normalize plus C{1} C{1} = normalize C{2}
+normalize plus C{1} C{1} = normalize C0
+
+zerop_test
+define zerotest normalize %a.ifthenelse (zerop a) true false
+normalize zerotest C0 = true
+normalize zerotest (pred (pred C{2})) = true
+normalize zerotest C{1} = false
+normalize zerotest C{2} = false
+
+define Y %f.((%x.f(x x))(%x.f(x x)))
+define R %n.%o.%p.(ifthenelse (zerop o) p (n (pred o) (succ p)))
+
+# Doing addition this way allows checking against
+# the Church-numeral "plus" term, above
+define add (Y R)
+
+add_plus_test
+normalize add C0 C0 = C0
+normalize plus C0 C0 = C0
+normalize add C{1} C0  = normalize C{1}   #\f.\n.f n -> \f.f, eta reduction
+normalize add C0 C{1}  = normalize C{1}
+normalize plus C0 C{1} = normalize C{1}
+normalize add C{1} C{1} = C{2}
+normalize plus C{1} C{1} = C{2}
+normalize add C{1} C{2} = C{3}
+normalize add C{2} C{1} = C{3}
+normalize succ (succ (succ C0)) = C{3}
+normalize add C{2} C{2} = normalize plus C{2} C{2}
+normalize plus C{45} C{1} = C{46}
+normalize plus C{1} C{45} = C{46}
+normalize add (add C{3} C{4}) C{2} = C{9}
+normalize plus (plus C{3} C{4}) C{2} = C{9}

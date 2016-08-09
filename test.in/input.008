@@ -1,0 +1,3 @@
+# Check output of bound-variable finder
+define A %x.%y.%z.a x b y c z
+bound A

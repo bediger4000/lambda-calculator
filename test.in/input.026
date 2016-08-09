@@ -1,0 +1,19 @@
+# Booleans in Lambda Calculus
+eta off
+def true \a.\b.a
+def false \a.\b.b
+def and  \m.\n.\a.\b.m (n a b) b
+def or   \m.\n.\a.\b.m a (n a b)
+def not  \m.\a.\b.m b a
+
+or true true
+or true false
+or false true
+or false false
+and true true
+and true false
+and false true
+and false false
+not false
+not (not true)
+(not (not (not false)))

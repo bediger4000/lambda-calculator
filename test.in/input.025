@@ -1,0 +1,9 @@
+# These should all reduce to the same thing, A A
+# An iterative algorithm for doing beta reductions
+# needs to handle a beta-reduction at any of these
+# places in the parse tree.  And not leak memory.
+(%x.((%a.a a) x) ) A
+(%a.a) (%x. x x) A
+(%x. x) ((%a.a a) A)
+(A) ((%a.a) A)
+(%y.y y) A

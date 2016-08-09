@@ -1,0 +1,5 @@
+# Verify change-of-bound-variable
+(%x.%y.y x)y
+(%x.%y.x y) y a
+(%x.%y.x y a b) y a
+(%x.%y.x y a b) A B

@@ -1,0 +1,45 @@
+# Classic Church Numerals
+eta off
+define zero %a.%b.b
+define succ %a.%b.%c.b (a b c)
+define plus %d.%e.%f.%g.d f (e f g)
+define pred %n.%f.%x.n(%g.%h.h (g f))(%u.x)(%u.u)
+define T %a.%b.a
+define F %a.%b.b
+define ifthenelse %p.%x.%y.p x y
+define zerop %n.n(%x.F) T
+
+define one normalize succ zero
+define two normalize succ one
+
+one
+%f.%x.f x 
+two
+%f.%x.f(f x)
+normalize pred two
+
+define zerotest normalize %a.ifthenelse (zerop a) true false
+normalize zerotest zero
+normalize zerotest (pred (pred two))
+normalize zerotest one
+normalize zerotest two
+
+define Y %f.((%x.f(x x))(%x.f(x x)))
+define R %n.%o.%p.(ifthenelse (zerop o) p (n (pred o) (succ p)))
+
+# Doing addition this way allows checking against the
+# each Church-numeral "plus" term, above
+define add (Y R)
+
+normalize add zero zero
+normalize plus zero zero
+normalize add one zero
+normalize add zero one 
+normalize plus zero one
+normalize add one one 
+normalize plus one one
+normalize add one two 
+normalize add two one
+normalize succ (succ (succ zero))
+normalize add two two 
+normalize plus two two

@@ -1,0 +1,11 @@
+# $Id: input.042,v 1.1 2011/11/01 22:52:38 bediger Exp $
+# Try out rebinding *all* of the bound variables in a big expression
+eta off
+def BIG (\a b c d e f g h i j k l m n o p q r s t u v w x y z. a b c d e f g h i j k l m n o p q r s t u v w x y z)
+BIG b
+BIG (A b C)
+def BIG2 (\a b c d e f g h i j k l m n o p q r s t u v w x y z A B C. a b c d e f g h i j k l m n o p q r s t u v w x y z A B C)
+BIG2 b
+BIG2 (a b c d)
+def BIG3 (\a b c d e f g h i j k l m n o p q r s t u v w x y z. a b c d e f g h i j k l m n o p q r s t u v w x y z)
+BIG3 (a b c d e f g h i j k l m n o p q r s t u v w x y z) 

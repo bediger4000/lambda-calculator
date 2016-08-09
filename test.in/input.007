@@ -1,0 +1,3 @@
+# Check output of free-variable finder
+define A %x.%y.%z.a x b y c z
+free A

@@ -1,2 +1,99 @@
-# lambda-calculator
-lambda calculus interpreter
+#lambda calculus interpreter
+
+This is the code for `lc`, a lambda calculus interpreter.
+
+`lc` does normal order (leftmost-outermost first) beta and eta reductions.
+
+`lc` will rename bound variables to prevent variable capture.
+
+##BUILDING
+
+I did not do GNU-style `autoconf` scripts.  I did write reasonably strict
+ANSI C (C89/C90 version, I hope) that compiles under a number of compilers
+and operating systems.
+
+To build the "lc" executable:
+
+    make gnu      # should work on most linuxes that have devel environment
+    make cc       # should work on most *BSDs, uses traditionally named tools
+    make pcc      # Uses the "pcc" C compiler
+    make lcc      # Uses the "lcc" C compiler
+    make tcc      # Uses the "tcc" C compiler
+
+Once that finishes (and it only takes a few seconds), you can do:
+
+    ./runtests    # to ensure that all the tests pass.
+
+##INSTALLING
+
+`lc` is a command line, interactive program.  It does not have any implicit
+startup files, or location or directory dependencies.  You can cp or mv
+the `lc` executable anwhere in your `PATH`, or leave it somewhere and call it
+explicitly:
+
+    % $HOME/src/lc-1.0/lc
+    LC>
+
+`lc` uses `LC>` as its prompt for interactive input.
+
+##RUNNING
+
+You have to use Control-D (end-of-file) to get it to exit cleanly.  It does
+not interpreter a special "exit" or "quit" command.
+
+Long-running or patience-exhausting reductions can be terminated with
+Control-C.  The "LC>" prompt should return.  Control-C'ing "lc" at the "LC>"
+prompt will cause it to exit.
+
+##LAMBDA CALCULUS TERMS
+
+Variables, bound or free, look like C or Java identifiers: start with a
+letter, contain letters, digits or underscores.
+
+The lambda-character prints as '%', but the user can use '%', '$', '^' or
+'\'.  The program reads and writes ASCII, so a Unicode lambda won't work.
+
+Binding sites ("\x") get seperated from an abstraction body by "." or "->".
+`\x.x x x` is the same as `$x -> x x x`.
+
+Hopefully, this allows some compatibility with other lambda calculators
+floating around the net.
+
+##TERM EQUIVALENCE
+
+Alpha equivalence:
+    term1 = term2
+
+Total lexical equivalence:
+    term1 == term2
+
+##ABBREVIATIONS
+
+    define identifier lambdaterm
+    def identifier lambdaterm
+    $$
+
+Using a previously-defined identifier in a new lambda term causes the
+interpreter to put a copy of the term's definition in the new term.
+
+The special token `$$` always represents the last normal form calculated.
+It changes every time something redues to a normal form.  The user can
+put `$$` in the next term input as many times as desired. Copies of the
+last normal form get inserted.
+
+
+##INTERPRETER COMMANDS
+
+    timer on   - print elapsed time of any reduction to normal form.
+    timer off  - default
+
+    eta on     - perform eta reductions, default.
+    eta off    - don't perform eta reductions.
+
+    trace on   - print information about each redex found and performed.
+    trace off  - default.
+
+    step on    - require user to hit return after each reduction.
+    step off   - default.
+
+    load "some/filename"  - read in and evaluate a file full of lc input.

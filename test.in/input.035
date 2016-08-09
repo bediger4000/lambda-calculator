@@ -1,0 +1,15 @@
+# $Id: input.035,v 1.1 2011/06/28 20:13:03 bediger Exp $
+# Exercize some corner cases to get better code coverage
+free zonk
+free cronk
+bound zonk
+bound cronk
+bound flonk
+trace on
+(\x.x x x) (\y.y)
+load "test.in/input.001"
+load "on"
+load "off"
+load crapola
+($x -> x x)(^y -> y)(%y.y)
+load "\a\b\c"

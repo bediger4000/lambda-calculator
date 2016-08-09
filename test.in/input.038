@@ -1,0 +1,14 @@
+# $Id: input.038,v 1.2 2011/11/03 12:58:00 bediger Exp $
+# Test the lexical equality operator, '='
+a == b
+a == a
+b == a
+normalize ((\x.x)a) == a
+a == normalize ((\x.x)a)
+normalize ((\x. x b )a) == a
+a == normalize ((\x.x b)a)
+normalize ((\x. x b )a) == normalize ((\x.x b)a)
+normalize ((\x. x b )a) == ((\x.x b)a)
+((\x. x b )a) == ((\x.x b)a)
+(((a b) c) d) == a b c d
+(((a b) c) d) == (a (b (c d)))

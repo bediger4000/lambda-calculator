@@ -1,0 +1,50 @@
+# Church numerals in lambda-I basis.
+eta on
+
+# Arithmetic operators from:
+# "A Theory of Positive Integers in Formal Logic, Part 1"
+# S.C. Kleene, American Journal of Mathematics, vol 57, no 1, Jan. 1935
+
+define c{*} \f n. *f n
+def I \bnm.bnm
+
+define succ (\r f x.(f (r f x)))
+define plus (\r s f x.(r f (s f x)))
+define mult (\r s x.(r (s x)))
+define exp \m n.n m
+
+# Number dyads and triads
+# These only work for Church Numerals
+def D (\r s f g a.(r f (s g a)))
+def D1 (\r f.r f (\x.x))
+def D2 (\r.r (\x.x))
+
+normalize (D2 (D (succ c{1}) c{1}) f n) = f n
+normalize (D1 (D (succ (succ c{1})) c{1}) f n) = f (f (f n))
+normalize (D2 (D c{1} c{5})) = normalize c{5}
+normalize (D1 (D c{1} c{5})) = normalize c{1}
+
+def T (\r s t f g h a. (r f (s g (t h a))))
+def T1 (\r f.(r f I I))
+def T2 (\r f.(r I f I))
+def T3 (\r.(r I I))
+
+(normalize (T1 (T c{1} c{2} c{3}) f n)) = f n
+(normalize (T2 (T c{1} c{2} c{3}) f n)) = f (f n)
+(normalize (T3 (T c{1} c{2} c{3}) f n)) = f (f (f n))
+
+# predecessor in lambda-I!
+def F (\r.(T (T2 r) (T3 r) (succ (T3 r))))
+def ff (T c{1} c{1} c{1})
+def pred (\r.(T1 (r F ff)))
+
+(normalize pred c{4}) = normalize c{3}
+(normalize pred c{3}) = normalize c{2}
+(normalize pred c{2}) = normalize c{1}
+(normalize pred c{1}) = normalize c{1}
+
+# Subtraction
+def sub (\u v.(v pred u))
+(normalize sub c{3} c{2} f n) = (normalize c{1} f n)
+(normalize sub (succ c{3}) c{2} f n) = (normalize c{2} f n)
+(normalize sub c{1} c{1} f n)  = (normalize c{1} f n)

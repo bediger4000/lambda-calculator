@@ -1,0 +1,107 @@
+# Mayer Goldberg.
+# An Adequate Left-Associated Binary. Numeral System
+# in the Lambda-Calculus. August 1995
+# http://www.brics.dk/RS/95/42/BRICS-RS-95-42.pdf
+eta off
+
+def I \x.x
+def T \x.\y.x
+def F \x.\y.y
+define if %e.%f.%g.(e f g)
+def and (\x.\y.(x (y T F) F))
+def pair \a.\b.\x.x a b
+def p22 \x.(x (\x0.\x1.x1))
+def M \m.\b2.\b1.(pair m (and b2 b1))
+def DF normalize pair M F
+def DT normalize pair M T
+def zerop \n.(p22 (n DT DF))
+
+def bin0 \z.\w.z
+def bin1 \z.\w.w
+def bin2 \z.\w.(z w)
+def bin3 \z.\w.(w w)
+
+def U10  \x0.\x1.x0
+def U11  \x0.\x1.x1
+def U20  \x0.\x1.\x2.x0
+def U21  \x0.\x1.\x2.x1
+def U22  \x0.\x1.\x2.x2
+
+def quadruple \a.\b.\c.\d.\s.(s a b c d)
+
+def A1 normalize quadruple m b2 (r1 w) U11
+def A2 normalize quadruple m b2 (r1 z) U10
+def A3 normalize quadruple m b2 (r1 z) U11
+def A4 normalize quadruple m b2 (r1 w) U11
+
+def M \m.\b2.\r2.\s2.\b1.\r1.\s1.(s1 (b1 (b2 A1 A1 (r1 w)) (b2 A2 A2 (r1 z w)) I) (b1 (b2 A3 A3 (r1 z)) (b2 A4 A4 (r1 w))I))
+
+def succ normalize \n.\z.\w.(n (quadruple M U20 I U10) (quadruple M U21 I U10) (quadruple M U22 I U10))
+
+def bin4 normalize succ bin3
+def bin5 normalize succ bin4
+def bin6 normalize succ bin5
+
+bin3
+bin4
+bin5
+bin6
+def bin7 normalize succ bin6
+bin7
+def bin8 normalize succ bin7
+bin8
+def bin9 normalize succ bin8
+bin9
+def bin10 normalize succ bin9
+bin10
+def bin11 normalize succ bin10
+bin11
+def bin12 normalize succ bin11
+bin12
+def bin13 normalize succ bin12
+bin13
+def bin14 normalize succ bin13
+bin14
+def bin15 normalize succ bin14
+bin15
+def bin16 normalize succ bin15
+bin16
+
+
+def quintuple \a.\b.\c.\d.\e.\s.(s a b c d e)
+
+def XA normalize quintuple m b2 (r12 w) (r12 w) U10
+def XB normalize quintuple m b2 r11 (r12 z) U11
+def XC normalize quintuple m b2 r11 (r11 z) U11
+def XD normalize quintuple m b2 (r12 w) (r12 w) U11
+
+def YA (b1 (b2 XA XA (r12 w)) (b2 XB XB r11) I)
+def YB (b1 (b2 XC XC r11) (b2 XD XD (r12 w)) I)
+
+def M \m.\b2.\r21.\r22.\s2.\b1.\r11.\r12.\s1.( s1 YA YB )
+def pred \n.\z.\w.(n (quintuple M U20 z I U10) (quintuple M U21 z I U10) (quintuple M U22 z I U10))
+
+zerop (pred bin1)
+pred bin2
+pred bin3
+pred bin4
+pred bin5
+pred bin7
+pred bin8
+pred bin15
+pred bin16
+
+define R %n.%o.%p.(if (zerop o) p (n (pred o) (succ p)))
+
+define Y %q.(%r.q(r r))(%s.q(s s))
+define add (Y R)
+
+normalize add bin1 bin0
+
+def pred normalize pred
+def succ normalize succ
+def zerop normalize zerop
+define R %n.%o.%p.(if (zerop o) p (n (pred o) (succ p)))
+define add (Y R)
+
+add bin1 bin0

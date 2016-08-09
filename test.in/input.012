@@ -1,0 +1,9 @@
+# Test "define" and "def" interpret commands
+define A a
+A
+def B A
+B
+define B %c.x y z
+B
+def C %b.x y A
+C

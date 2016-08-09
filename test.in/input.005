@@ -1,0 +1,3 @@
+# Check that it does NOR (vs AOR)
+# NOR reduces to "y", AOR does not terminate.
+(%x.y)((%x.(x x))(%x.(x x)))

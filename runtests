@@ -1,0 +1,47 @@
+#!/bin/bash
+
+if [ ! -x ./lc ]
+then
+	echo "Compile lc first" >&2
+	exit 0
+fi
+
+# Test inputs in test.in/input.NNN
+# Correct outputs in test.out/correct.NNN
+
+rm -f test.out/output.*
+
+WRONG=""
+
+for FNAME in test.in/input.*
+do
+	N=${FNAME##*.}
+	echo Running case $N
+	./lc -p < $FNAME > test.out/output.$N
+	echo Verifying case $N
+	if [ ! -r test.out/correct.$N ]
+	then
+		echo "No correct output for test case $N"
+	else
+		if diff test.out/correct.$N test.out/output.$N > /dev/null
+		then
+			:
+		else
+			echo "Test case $N went wrong"
+			WRONG=$WRONG" "$N
+		fi
+	fi
+done
+
+./lc -l -L /dev/null -p  > /dev/null 2>&1 < /dev/null
+./lc -p -L spork -L foopn > /dev/null 2>&1 < /dev/null
+./lc -L test.in/input.001 > /dev/null 2>&1 < /dev/null
+./lc -L test.in/input.001 -L test.in/input.001 > /dev/null 2>&1 < /dev/null
+./lc -p -L test.in/input.001 > /dev/null 2>&1 < /dev/null
+./lc -a "^^^" -l X > /dev/null 2>&1 < /dev/null
+./lc -x -v zbq > /dev/null 2>&1 < /dev/null
+
+if [ ! -z "$WRONG" ]
+then
+	echo "Failed test cases: $WRONG"
+fi

@@ -1,0 +1,9 @@
+true
+false
+first
+second
+%j.j
+%z.z (%c.%d.d) (%j.j)
+%z.z (%c.%d.d) (%j.j)
+%z.z (%c.%d.d) (%z.z (%c.%d.d) (%j.j))
+%z.z (%c.%d.d) (%z.z (%c.%d.d) (%z.z (%c.%d.d) (%z.z (%c.%d.d) (%j.j))))

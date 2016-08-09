@@ -1,0 +1,53 @@
+# Bluff Combinator - spoofs "is zero" and "numerically equal"
+# predicates for Church Numerals.
+eta off
+def pair %A.%B.%a.(a A B) # Ordered pair
+def true  %b.%x.b
+def false %d.%e.e
+def p21  %f.((f)true)   # pick first of an ordered pair
+def p22  %p.((p)false)  # pick second of an ordered pair
+def not   %g.(g false true)
+def or    %h.%i.(h true i)
+def and   %j.%k.(j k false)
+def I     %l.l
+def succ  %o.%p.%q.p(o p q)
+def C0    false
+def C{*}  \d.\e.*d e
+def pred  %r.(p22 (r (%s.(pair (succ (p21 s)) (p21 s))) (pair C0 C0)))
+def monus %t.%u.(u pred t)
+def zerop %v.(v (%w.false) true)
+def equal %x.%y.(and (zerop (monus x y)) (zerop (monus y x)))
+def bluff1 %r1.%r2.(zerop (r2 C0 C{1}) true (equal C{1} (r2 (\x.C{3}) C{2}) (%x.C0) C0))
+def bluff2 %r1.%r2.(r2 (%x.true) true I)
+
+# All the "normalize" commands should evaluate to %b.%x.b, "true"
+
+normalize zerop bluff1 = true
+normalize equal bluff1 bluff1 = true
+normalize equal bluff1 C0 = true
+normalize equal C0  bluff1 = true
+normalize equal C{1}  bluff1  = true
+normalize equal bluff1 C{1} = true
+normalize equal C{2}  bluff1  = true
+normalize equal bluff1 C{2} = true
+normalize equal C{3}  bluff1  = true
+normalize equal bluff1 C{3} = true
+normalize equal C{4}  bluff1  = true
+normalize equal bluff1 C{4} = true
+normalize equal C{5}  bluff1  = true
+normalize equal bluff1 C{5} = true
+
+normalize zerop bluff2 = true
+normalize equal bluff2 bluff2 = true
+normalize equal bluff2 C0 = true
+normalize equal C0  bluff2  = true
+normalize equal C{1}  bluff2  = true
+normalize equal bluff2 C{1} = true
+normalize equal C{2}  bluff2  = true
+normalize equal bluff2 C{2} = true
+normalize equal C{3}  bluff2  = true
+normalize equal bluff2 C{3} = true
+normalize equal C{4}  bluff2  = true
+normalize equal bluff2 C{4} = true
+normalize equal C{5}  bluff2  = true
+normalize equal bluff2 C{5} = true

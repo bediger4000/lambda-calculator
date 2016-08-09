@@ -1,0 +1,8 @@
+%x.x x
+%a.%b.%c.c (%x.%a.%b.%c.b (%a.%b.%c.a x) (%a.%b.%c.a x))
+%v.v v
+%a.%b.%c.a b c
+%b.%c.%d.d (%a.%c.%d.%e.e (%b.%d.%e.%f.f (%c.%d.%e.%f.e (%c.%d.%e.d (%b.%c.%d.b a) (%a.%c.%d.a b)) (%a.%b.%d.a c))))
+%v.%a.%b.v a b
+%b.%c.%h.h (%a.%a.%c.%h.h (%b.%a.%b.%h.h (%c.%a.%b.%c.b (%a.%b.%c.b (%a.%b.%c.b (%a.%b.%c.a d) (%a.%b.%c.a e)) (%a.%b.%c.a f)) (%a.%b.%c.a g))))
+%v.%v.%v.d e f g

@@ -1,0 +1,21 @@
+# Test the "godelize" built-in, by means of Torben Mogensen's
+# "Self-interpreter".
+eta off
+def F \e.\m.m (\x.x) (\m.\n.(e m)(e n)) (\m.\v.e (m v))
+def Y \h.(\x.h(x x))(\x.h(x x))
+
+def E Y F
+
+def doubler %x.x x
+print doubler
+def m godelize doubler
+print m
+E m
+def x %a.%b.%c.a b c
+print x
+def z godelize x
+print z
+E z
+def q godelize (%a.%b.%c.d e f g)
+print q
+E q

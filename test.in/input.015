@@ -1,0 +1,20 @@
+# Simpler recursive function
+define T %T1.%T2.T1
+define F %F1.%F2.F2
+define IF %IF1.%IF2.%IF3.((IF1) IF2) IF3
+define PAIR %PAIR1.%PAIR2.%PAIR3.(PAIR3 PAIR1 PAIR2)
+define zero %zero1.zero1
+define SUCC %SUCC1.(PAIR F SUCC1)
+define one normalize SUCC zero
+define two normalize SUCC one
+define three normalize SUCC two
+define PRED %PRED1.(PRED1 F)
+define ZEROP %ZEROP1.ZEROP1 T
+define R %R1.%R2.(IF (ZEROP R2) arrived (R1 (PRED R2)))
+define Y %q.(%r.q(r r))(%s.q(s s))
+# FUN - reduces to "arrived" ever time.
+define FUN (Y R)
+normalize FUN zero
+normalize FUN one
+normalize FUN two
+normalize FUN three

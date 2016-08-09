@@ -1,0 +1,4 @@
+# see if it can scope a bound variable correctly.
+def B (%a.%b.%c. a (b c))
+def scoper (%v.v (%v.v (%v.v)))
+scoper B B B x y z
