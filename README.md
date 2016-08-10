@@ -12,7 +12,7 @@ I did not do GNU-style `autoconf` scripts.  I did write reasonably strict
 ANSI C (C89/C90 version, I hope) that compiles under a number of compilers
 and operating systems.
 
-To build the "lc" executable:
+To build the `lc` executable:
 
     make gnu      # should work on most linuxes that have devel environment
     make cc       # should work on most *BSDs, uses traditionally named tools
@@ -42,7 +42,7 @@ You have to use Control-D (end-of-file) to get it to exit cleanly.  It does
 not interpreter a special "exit" or "quit" command.
 
 Long-running or patience-exhausting reductions can be terminated with
-Control-C.  The "LC>" prompt should return.  Control-C'ing "lc" at the "LC>"
+Control-C.  The `LC>` prompt should return.  Control-C'ing `lc` at the `LC>`
 prompt will cause it to exit.
 
 ##LAMBDA CALCULUS TERMS
@@ -61,11 +61,9 @@ floating around the net.
 
 ##TERM EQUIVALENCE
 
-Alpha equivalence:
-    term1 = term2
+Alpha equivalence: `term1 = term2`
 
-Total lexical equivalence:
-    term1 == term2
+Total lexical equivalence: `term1 == term2`
 
 ##ABBREVIATIONS
 
@@ -74,26 +72,53 @@ Total lexical equivalence:
     $$
 
 Using a previously-defined identifier in a new lambda term causes the
-interpreter to put a copy of the term's definition in the new term.
+interpreter to put a copy of the term's definition in the new term.  Be
+careful. Abstractions can "capture" identifiers in the abbreviation that
+lexically match the bound variable.
 
 The special token `$$` always represents the last normal form calculated.
 It changes every time something redues to a normal form.  The user can
 put `$$` in the next term input as many times as desired. Copies of the
 last normal form get inserted.
 
+##PARAMETERIZED ABBREVIATIONS
+
+    define identifier *term
+    define identifier term1 *term2
+    define identifier *term1 *term2
+
+Marked subterms of the term denoted by _identifier_ can get expanded.
+When the interpreter sees a use of an abbreviation like `identifier{N}`
+(where N is greater than zero) it expands the marked terms N times.
+This feature can be used to make Church numerals more convenient.
+
+    LC> def C0 \f n.n
+    LC> def C  \f n.*f n
+    LC> print C{2}
+    %f.%n.f (f n)
 
 ##INTERPRETER COMMANDS
 
-    timer on   - print elapsed time of any reduction to normal form.
-    timer off  - default
+Print elapsed time of any reduction to normal form, default off:
 
-    eta on     - perform eta reductions, default.
-    eta off    - don't perform eta reductions.
+    timer on
+    timer off
 
-    trace on   - print information about each redex found and performed.
-    trace off  - default.
+Perform eta reductions, default on:
 
-    step on    - require user to hit return after each reduction.
-    step off   - default.
+    eta on
+    eta off
 
-    load "some/filename"  - read in and evaluate a file full of lc input.
+Print information about each redex found and performed:
+
+    trace on
+    trace off
+
+Require user to hit return after each reduction:
+
+    step on
+    step off
+
+Read in and evaluate a file full of `lc` input:
+
+    load "some/filename"
