@@ -1,4 +1,4 @@
-#lambda calculus interpreter
+# lambda calculus interpreter
 
 This is the code for `lc`, a lambda calculus interpreter.
 
@@ -6,7 +6,7 @@ This is the code for `lc`, a lambda calculus interpreter.
 
 `lc` will rename bound variables to prevent variable capture.
 
-##BUILDING
+## BUILDING
 
 I did not do GNU-style `autoconf` scripts.  I did write reasonably strict
 ANSI C (C89/C90 version, I hope) that compiles under a number of compilers
@@ -24,7 +24,7 @@ Once that finishes (and it only takes a few seconds), you can do:
 
     ./runtests    # to ensure that all the tests pass.
 
-##INSTALLING
+## INSTALLING
 
 `lc` is a command line, interactive program.  It does not have any implicit
 startup files, or location or directory dependencies.  You can cp or mv
@@ -36,7 +36,7 @@ explicitly:
 
 `lc` uses `LC>` as its prompt for interactive input.
 
-##RUNNING
+## RUNNING
 
 You have to use Control-D (end-of-file) to get it to exit cleanly.  It does
 not interpreter a special "exit" or "quit" command.
@@ -45,7 +45,7 @@ Long-running or patience-exhausting reductions can be terminated with
 Control-C.  The `LC>` prompt should return.  Control-C'ing `lc` at the `LC>`
 prompt will cause it to exit.
 
-##LAMBDA CALCULUS TERMS
+## LAMBDA CALCULUS TERMS
 
 Variables, bound or free, look like C or Java identifiers: start with a
 letter, contain letters, digits or underscores.
@@ -59,13 +59,13 @@ Binding sites ("\x") get seperated from an abstraction body by "." or "->".
 Hopefully, this allows some compatibility with other lambda calculators
 floating around the net.
 
-##TERM EQUIVALENCE
+## TERM EQUIVALENCE
 
 Alpha equivalence: `term1 = term2`
 
 Total lexical equivalence: `term1 == term2`
 
-##ABBREVIATIONS
+## ABBREVIATIONS
 
     define identifier lambdaterm
     def identifier lambdaterm
@@ -81,7 +81,7 @@ It changes every time something redues to a normal form.  The user can
 put `$$` in the next term input as many times as desired. Copies of the
 last normal form get inserted.
 
-##PARAMETERIZED ABBREVIATIONS
+## PARAMETERIZED ABBREVIATIONS
 
     define identifier *term
     define identifier term1 *term2
@@ -97,7 +97,7 @@ This feature can be used to make Church numerals more convenient.
     LC> print C{2}
     %f.%n.f (f n)
 
-##INTERPRETER COMMANDS
+## INTERPRETER COMMANDS
 
 Print elapsed time of any reduction to normal form, default off:
 
