@@ -51,7 +51,7 @@ Variables, bound or free, look like C or Java identifiers: start with a
 letter, contain letters, digits or underscores.
 
 The lambda-character prints as '%', but the user can use '%', '$', '^' or
-'\'.  The program reads and writes ASCII, so a Unicode lambda won't work.
+'\\'.  The program reads and writes ASCII, so a Unicode lambda won't work.
 
 Binding sites ("\x") get seperated from an abstraction body by "." or "->".
 `\x.x x x` is the same as `$x -> x x x`.
